@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,20 +42,25 @@ public class DispositivoController {
 		return ds.findById(id);
 	}
 
-	@PostMapping("/{id}")
+	@PutMapping("/{id}")
 	public Dispositivo findByIdAndUpdate(@PathVariable UUID id, @RequestBody DispositivoRequestPayload body) {
 		return ds.findByIdAndUpdate(id, body);
 	}
 
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void deleteDispositivo(UUID id) {
+	public void deleteDispositivo(@PathVariable UUID id) {
 		ds.deleteDispositivo(id);
 	}
 
-	@PatchMapping("/{id}")
+	@PatchMapping("/{id}/utenti")
 	public Dispositivo changeUtente(@PathVariable UUID id, @RequestParam(required = false) UUID utenteId) {
 		return ds.changeUtente(id, utenteId);
+	}
+
+	@PatchMapping("/{id}")
+	public Dispositivo changeStato(@PathVariable UUID id, @RequestParam StatoDispositivo stato) {
+		return ds.changeStato(id, stato);
 	}
 
 }

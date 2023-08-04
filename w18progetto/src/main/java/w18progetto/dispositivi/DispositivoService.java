@@ -71,6 +71,12 @@ public class DispositivoService {
 		return dr.save(dispositivo);
 	}
 
+	public Dispositivo changeStato(UUID id, StatoDispositivo stato) {
+		Dispositivo dispositivo = this.findById(id);
+		dispositivo.setStato(stato);
+		return dr.save(dispositivo);
+	}
+
 	public List<Dispositivo> findByUtenteId(UUID utenteId) {
 		return dr.findAllByUtenteId(utenteId);
 	}
