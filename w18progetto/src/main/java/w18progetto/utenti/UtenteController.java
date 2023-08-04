@@ -15,16 +15,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import w18progetto.general.GeneralService;
 import w18progetto.utenti.payloads.UtenteRequestPayload;
 
 @RestController
 @RequestMapping("/utenti")
 public class UtenteController {
 	private final UtenteService us;
+	private final GeneralService gs;
 
 	@Autowired
-	public UtenteController(UtenteService us) {
+	public UtenteController(UtenteService us, GeneralService gs) {
 		this.us = us;
+		this.gs = gs;
 	}
 
 	@GetMapping
@@ -45,8 +48,8 @@ public class UtenteController {
 
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void deleteUtente(UUID id) {
-		us.deleteUtente(id);
+	public void deleteUtente(@PathVariable UUID id) {
+		gs.deleteUtente(id);
 	}
 
 }
